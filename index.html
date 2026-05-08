@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral Framing - Travel App</title>
+    <style>
+        :root {
+            --primary-color: #FF5A5F;
+            --blue-color: #007AFF;
+            --green-highlight: #00A699;
+            --text-dark: #222222;
+            --text-gray: #666666;
+            --card-radius: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #dcdcdc;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .phone-container {
+            background: linear-gradient(180deg, #E8F5E9 0%, #C8E6C9 100%);
+            width: 375px;
+            height: 750px;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border: 10px solid #111;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-header {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            border-bottom: 1px solid #eee;
+            z-index: 10;
+        }
+
+        .app-content {
+            flex: 1;
+            overflow-y: auto;
+            position: relative;
+            padding: 0 20px 20px 20px;
+        }
+
+        .hotel-image-container {
+            width: 100%;
+            height: 220px;
+            position: relative;
+            background: linear-gradient(135deg, #e0e0e0 0%, #cfcfcf 100%);
+            overflow: hidden;
+        }
+
+        .hotel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-top: -30px;
+            position: relative;
+            margin-bottom: 30px;
+            z-index: 5;
+            margin-left: 15px;
+            margin-right: 15px;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .hotel-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 0 6px 0;
+            color: var(--text-dark);
+        }
+
+        .hotel-rating {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .booking-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .message-box {
+            border-radius: var(--card-radius);
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .msg-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .msg-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.5px;
+            color: #1B5E20;
+        }
+
+        .msg-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            color: #444;
+        }
+
+        .decision-box {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+        }
+
+        .decision-q {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-yes {
+            background-color: var(--green-highlight);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 166, 153, 0.3);
+        }
+
+        .btn-no {
+            background-color: #E0E0E0;
+            color: #333;
+        }
+
+        .nav-btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            background: white;
+            color: var(--blue-color);
+            border: 1px solid var(--blue-color);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:active {
+            background: #f0f8ff;
+            transform: scale(0.98);
+        }
+
+        .footer-tag {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #bbb;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-box {
+            background: white;
+            width: 80%;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .modal-btn {
+            background: var(--blue-color);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <div class="app-header">Confirm Booking</div>
+
+    <div class="app-content">
+        <div class="hotel-image-container">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hotel View" class="hotel-img">
+        </div>
+
+        <div class="info-card">
+            <h1 class="hotel-title">Grand Park Hotel</h1>
+            <div class="hotel-rating">★ 4.8 (Excellent)</div>
+            <div class="booking-info">
+                <span>Queen Room</span>
+                <span>1 Night</span>
+                <span>2 Guests</span>
+            </div>
+        </div>
+
+        <div class="message-box">
+            <h2 class="msg-title">Stay More Responsibly</h2>
+            <p class="msg-text">
+                Reduce waste and help protect the destination.<br>
+                Select Green Stay for your trip.
+            </p>
+        </div>
+
+        <div class="decision-box">
+            <p class="decision-q">Would you select this option?</p>
+            <div class="btn-group">
+                <button class="btn btn-yes" onclick="handleChoice('Yes')">Yes</button>
+                <button class="btn btn-no" onclick="handleChoice('No')">No</button>
+            </div>
+        </div>
+
+        <div class="nav-btn-group">
+        </div>
+    </div>
+
+    <div class="footer-tag">
+        🔒 Secure Booking Guarantee
+    </div>
+
+    <div id="confirm-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 style="margin-top:0">All Steps Completed</h3>
+            <p id="modal-text" style="color:#666; margin-bottom:20px">Thank you for completing the survey.</p>
+            <button class="modal-btn" onclick="closeModal()">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleChoice(choice) {
+        if (choice === 'Yes') {
+            alert('You selected this option!');
+        } else {
+            alert('You cancelled this option!');
+        }
+    }
+
+    function nextPage() {
+        document.getElementById('confirm-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('confirm-modal').style.display = 'none';
+        alert("Submission Successful! Thank you.");
+    }
+</script>
+
+</body>
+</html>
