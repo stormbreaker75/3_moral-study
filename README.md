@@ -1,2 +1,2 @@
 # 3_moral-study
-moral-study
+3 moral
